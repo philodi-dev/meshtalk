@@ -1,10 +1,16 @@
 ![ChatGPT Image Jul 5, 2025 at 06_07_31 PM](https://github.com/user-attachments/assets/2660f828-49c7-444d-beca-d8b01854667a)
-# bitchat
+# MeshTalk
 
 > [!WARNING]
 > Private message and channel features have not received external security review and may contain vulnerabilities. Do not use for sensitive use cases, and do not rely on its security until it has been reviewed. Work in progress. Public local chat (the main feature) has no security concerns. 
 
 A decentralized peer-to-peer messaging app that works over Bluetooth mesh networks. No internet required, no servers, no phone numbers. It's the side-groupchat. 
+
+## Author
+
+**Philodi**  
+Email: me@philodi.com  
+Website: https://philodi.com
 
 ## License
 
@@ -35,20 +41,20 @@ This project is released into the public domain. See the [LICENSE](LICENSE) file
 
 2. Generate the Xcode project:
    ```bash
-   cd bitchat
+   cd MeshTalk
    xcodegen generate
    ```
 
 3. Open the generated project:
    ```bash
-   open bitchat.xcodeproj
+   open MeshTalk.xcodeproj
    ```
 
 ### Option 2: Using Swift Package Manager
 
 1. Open the project in Xcode:
    ```bash
-   cd bitchat
+   cd MeshTalk
    open Package.swift
    ```
 
@@ -57,7 +63,7 @@ This project is released into the public domain. See the [LICENSE](LICENSE) file
 ### Option 3: Manual Xcode Project
 
 1. Open Xcode and create a new iOS/macOS App
-2. Copy all Swift files from the `bitchat` directory into your project
+2. Copy all Swift files from the `MeshTalk` directory into your project
 3. Update Info.plist with Bluetooth permissions
 4. Set deployment target to iOS 16.0 / macOS 13.0
 
@@ -79,7 +85,7 @@ This project is released into the public domain. See the [LICENSE](LICENSE) file
 
 ### Getting Started
 
-1. Launch bitchat on your device
+1. Launch MeshTalk on your device
 2. Set your nickname (or use the auto-generated one)
 3. You'll automatically connect to nearby peers
 4. Join a channel with `/j #general` or start chatting in public
@@ -131,7 +137,7 @@ This project is released into the public domain. See the [LICENSE](LICENSE) file
 ## Technical Architecture
 
 ### Binary Protocol
-bitchat uses an efficient binary protocol optimized for Bluetooth LE:
+MeshTalk uses an efficient binary protocol optimized for Bluetooth LE:
 - Compact packet format with 1-byte type field
 - TTL-based message routing (max 7 hops)
 - Automatic fragmentation for large messages
@@ -162,3 +168,74 @@ The protocol is designed to be platform-agnostic. An Android client can be built
 
 Want to try this on macos: `just run` will set it up and run from source. 
 Run `just clean` afterwards to restore things to original state for mobile app building and development.
+
+## Customization Ideas
+
+### UI/UX Enhancements
+- **Dark/Light Theme Toggle**: Add theme switching capability with custom color schemes
+- **Custom Chat Bubbles**: Implement different bubble styles and message layouts
+- **Animated Transitions**: Add smooth animations for message sending/receiving
+- **Custom Fonts**: Allow users to choose from different font families
+- **Message Timestamps**: Add configurable timestamp display options
+- **Typing Indicators**: Show when other users are typing
+
+### Feature Extensions
+- **File Sharing**: Support for sharing images, documents, and other files
+- **Voice Messages**: Add voice recording and playback capabilities
+- **Message Reactions**: Emoji reactions to messages
+- **Message Threading**: Reply to specific messages with threading
+- **Message Search**: Search through chat history
+- **Message Forwarding**: Forward messages to other channels
+- **Custom Emojis**: Add support for custom emoji packs
+- **Message Scheduling**: Schedule messages to be sent later
+
+### Privacy & Security
+- **Message Expiration**: Set messages to auto-delete after a time period
+- **Screenshot Detection**: Warn users when screenshots are taken
+- **Biometric Lock**: Add fingerprint/Face ID protection
+- **Stealth Mode**: Hide app icon and notifications
+- **Message Encryption Levels**: Different encryption options for different security needs
+
+### Network & Performance
+- **Wi-Fi Direct Support**: Extend beyond Bluetooth to Wi-Fi Direct
+- **Internet Bridge**: Optional internet connectivity for wider reach
+- **Message Priority**: High-priority message delivery
+- **Offline Mode**: Enhanced offline functionality
+- **Network Statistics**: Show connection quality and network health
+
+## Roadmap
+
+### Phase 1: Core Enhancements (Q1 2024)
+- [ ] Implement dark/light theme toggle
+- [ ] Add message timestamps and typing indicators
+- [ ] Improve UI with custom chat bubbles
+- [ ] Add message search functionality
+- [ ] Implement file sharing for images
+
+### Phase 2: Advanced Features (Q2 2024)
+- [ ] Voice message support
+- [ ] Message reactions with emojis
+- [ ] Message threading and replies
+- [ ] Message expiration settings
+- [ ] Biometric authentication
+
+### Phase 3: Network Expansion (Q3 2024)
+- [ ] Wi-Fi Direct integration
+- [ ] Internet bridge for extended reach
+- [ ] Enhanced offline mode
+- [ ] Network statistics dashboard
+- [ ] Message priority system
+
+### Phase 4: Privacy & Security (Q4 2024)
+- [ ] Screenshot detection
+- [ ] Stealth mode implementation
+- [ ] Advanced encryption options
+- [ ] Message forwarding capabilities
+- [ ] Custom emoji support
+
+### Phase 5: Platform Expansion (2025)
+- [ ] Android client development
+- [ ] Web client for desktop browsers
+- [ ] API for third-party integrations
+- [ ] Plugin system for custom features
+- [ ] Cross-platform sync capabilities

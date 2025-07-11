@@ -1,4 +1,4 @@
-# WiFi Direct Integration Plan for BitChat
+# WiFi Direct Integration Plan for MeshTalk
 
 ## Overview
 
@@ -43,7 +43,7 @@ protocol TransportProtocol {
     
     func startDiscovery()
     func stopDiscovery()
-    func send(_ packet: BitchatPacket, to peer: PeerID?) 
+    func send(_ packet: MeshTalkPacket, to peer: PeerID?) 
     func setDelegate(_ delegate: TransportDelegate)
 }
 
@@ -59,7 +59,7 @@ class TransportManager {
     private var transports: [TransportProtocol] = []
     private var routingTable: [PeerID: TransportType] = [:]
     
-    func sendOptimal(_ packet: BitchatPacket, to peer: PeerID?) {
+    func sendOptimal(_ packet: MeshTalkPacket, to peer: PeerID?) {
         // Choose best transport based on:
         // 1. Message size
         // 2. Battery level
@@ -127,7 +127,7 @@ class TransportManager {
 ## Proposed File Structure
 
 ```
-bitchat/
+MeshTalk/
 ├── Transports/
 │   ├── TransportProtocol.swift
 │   ├── TransportManager.swift
@@ -154,7 +154,7 @@ bitchat/
 import MultipeerConnectivity
 
 class WiFiDirectTransport: NSObject, TransportProtocol {
-    private let serviceType = "bitchat-wifi"
+    private let serviceType = "meshtalk-wifi"
     private var peerID: MCPeerID
     private var session: MCSession
     private var advertiser: MCNearbyServiceAdvertiser

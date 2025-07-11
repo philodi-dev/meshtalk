@@ -1,6 +1,6 @@
-# BitChat macOS Build
+# MeshTalk macOS Build
 
-This Justfile provides easy commands to build and run BitChat natively on macOS while preserving the original project configuration.
+This Justfile provides easy commands to build and run MeshTalk natively on macOS while preserving the original project configuration.
 
 ## Quick Start
 
@@ -24,7 +24,7 @@ just
 
 The Justfile temporarily modifies `project.yml` to:
 - Use your local development team ID (replaces `L3N5LHJD5Y`)
-- Change bundle identifier to avoid conflicts (`chat.bitchat` → `com.local.bitchat`)
+- Change bundle identifier to avoid conflicts (`chat.meshtalk` → `com.local.meshtalk`)
 - Disable code signing for local development (`Automatic` → `Manual`)
 - Exclude iOS-specific files from macOS build (`LaunchScreen.storyboard`)
 

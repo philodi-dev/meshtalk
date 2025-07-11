@@ -1,8 +1,8 @@
-# bitchat Technical Whitepaper
+# MeshTalk Technical Whitepaper
 
 ## Abstract
 
-bitchat is a decentralized, peer-to-peer messaging application that operates over Bluetooth Low Energy (BLE) mesh networks. It provides ephemeral, encrypted communication without relying on internet infrastructure, making it resilient to network outages and censorship. This whitepaper details the technical architecture, protocols, and privacy mechanisms that enable secure, decentralized communication.
+MeshTalk is a decentralized, peer-to-peer messaging application that operates over Bluetooth Low Energy (BLE) mesh networks. It provides ephemeral, encrypted communication without relying on internet infrastructure, making it resilient to network outages and censorship. This whitepaper details the technical architecture, protocols, and privacy mechanisms that enable secure, decentralized communication.
 
 ## Table of Contents
 
@@ -20,7 +20,7 @@ bitchat is a decentralized, peer-to-peer messaging application that operates ove
 
 ## Introduction
 
-bitchat addresses the need for resilient, private communication that doesn't depend on centralized infrastructure. By leveraging Bluetooth Low Energy mesh networking, bitchat enables direct peer-to-peer messaging within physical proximity, with automatic message relay extending the effective range beyond direct Bluetooth connections.
+MeshTalk addresses the need for resilient, private communication that doesn't depend on centralized infrastructure. By leveraging Bluetooth Low Energy mesh networking, MeshTalk enables direct peer-to-peer messaging within physical proximity, with automatic message relay extending the effective range beyond direct Bluetooth connections.
 
 ### Key Features
 
@@ -86,7 +86,7 @@ graph TB
 
 ## Bluetooth Mesh Network
 
-bitchat implements a custom mesh networking protocol over BLE, where each device acts as both a central (client) and peripheral (server), enabling multi-hop message delivery.
+MeshTalk implements a custom mesh networking protocol over BLE, where each device acts as both a central (client) and peripheral (server), enabling multi-hop message delivery.
 
 ### Network Topology
 
@@ -178,7 +178,7 @@ sequenceDiagram
 </div>
 
 Each device:
-1. **Advertises** as a BLE peripheral with the bitchat service UUID
+1. **Advertises** as a BLE peripheral with the MeshTalk service UUID
 2. **Scans** for other devices advertising the same service
 3. **Connects** to discovered peers as a central
 4. **Maintains** simultaneous connections as both central and peripheral
@@ -311,7 +311,7 @@ Key features:
 
 ## Encryption and Security
 
-bitchat implements multiple layers of encryption for secure communication.
+MeshTalk implements multiple layers of encryption for secure communication.
 
 ### Key Exchange Protocol
 
@@ -412,7 +412,7 @@ stateDiagram-v2
 
 ## Binary Protocol Specification
 
-bitchat uses an efficient binary protocol to minimize bandwidth usage.
+MeshTalk uses an efficient binary protocol to minimize bandwidth usage.
 
 ### Packet Structure
 
@@ -420,7 +420,7 @@ bitchat uses an efficient binary protocol to minimize bandwidth usage.
 
 ```mermaid
 classDiagram
-    class BitchatPacket {
+    class MeshTalkPacket {
         +uint8 version
         +uint8 type
         +bytes[8] senderID
@@ -449,9 +449,9 @@ classDiagram
         <<optional>> May be omitted
     }
     
-    BitchatPacket --> PacketHeader
-    BitchatPacket --> PacketBody
-    BitchatPacket --> PacketSignature
+    MeshTalkPacket --> PacketHeader
+MeshTalkPacket --> PacketBody
+MeshTalkPacket --> PacketSignature
 ```
 
 </div>
@@ -474,7 +474,7 @@ classDiagram
 
 ### Message Compression
 
-bitchat implements intelligent message compression to reduce bandwidth usage:
+MeshTalk implements intelligent message compression to reduce bandwidth usage:
 
 <div align="center">
 
@@ -547,7 +547,7 @@ For efficient duplicate message detection:
 
 ## Privacy Features
 
-bitchat implements several privacy-enhancing mechanisms.
+MeshTalk implements several privacy-enhancing mechanisms.
 
 ### Cover Traffic
 
@@ -661,7 +661,7 @@ graph TD
 
 ## Complete Message Flow
 
-To illustrate how all components work together, here's the complete flow of a message through the bitchat system:
+To illustrate how all components work together, here's the complete flow of a message through the MeshTalk system:
 
 <div align="center">
 
@@ -747,11 +747,11 @@ The planned architecture will abstract transport selection:
 protocol TransportProtocol {
     var transportType: TransportType { get }
     var isAvailable: Bool { get }
-    func send(_ packet: BitchatPacket, to peer: PeerID?)
+    func send(_ packet: MeshTalkPacket, to peer: PeerID?)
 }
 
 class TransportManager {
-    func sendOptimal(_ packet: BitchatPacket, to peer: PeerID?) {
+    func sendOptimal(_ packet: MeshTalkPacket, to peer: PeerID?) {
         // Choose based on: message size, battery, available transports
     }
 }
@@ -759,7 +759,7 @@ class TransportManager {
 
 ## Future Considerations: Network Bridge Extension
 
-While bitchat is designed to operate without internet infrastructure, there are scenarios where selective network bridging could enhance its capabilities without compromising its core principles. The Nostr protocol presents a particularly interesting integration opportunity.
+While MeshTalk is designed to operate without internet infrastructure, there are scenarios where selective network bridging could enhance its capabilities without compromising its core principles. The Nostr protocol presents a particularly interesting integration opportunity.
 
 ### Nostr as a Bridge Protocol
 
@@ -795,11 +795,11 @@ graph TB
 
 **1. Geographic Bridge**: Connect isolated mesh networks across distances while maintaining local peer-to-peer operation.
 
-**2. Asynchronous Delivery**: Nostr's event-based model aligns well with bitchat's store-and-forward mechanism, enabling message delivery across time zones and sporadic connectivity.
+**2. Asynchronous Delivery**: Nostr's event-based model aligns well with MeshTalk's store-and-forward mechanism, enabling message delivery across time zones and sporadic connectivity.
 
 **3. Selective Sharing**: Users could opt-in to share specific channels or conversations beyond the local mesh, maintaining privacy by default.
 
-**4. Decentralized Architecture**: Nostr's relay model preserves bitchat's decentralization principles - no single point of failure or control.
+**4. Decentralized Architecture**: Nostr's relay model preserves MeshTalk's decentralization principles - no single point of failure or control.
 
 ### Implementation Approach
 
@@ -815,21 +815,21 @@ sequenceDiagram
     
     alt Channel allows bridging
         G->>N: Convert to Nostr event
-        Note over N: Add bitchat metadata<br/>Maintain encryption
+        Note over N: Add MeshTalk metadata<br/>Maintain encryption
         N->>R: Publish event
         R->>R: Store and relay
     else Local only
         G->>M: Keep within mesh
     end
     
-    R->>N: New bitchat event
-    N->>G: Convert to bitchat message
+    R->>N: New MeshTalk event
+N->>G: Convert to MeshTalk message
     G->>M: Inject into local mesh
 ```
 
 ### Privacy Preservation
 
-Key considerations for maintaining bitchat's privacy model:
+Key considerations for maintaining MeshTalk's privacy model:
 
 1. **Opt-in Only**: Network bridging disabled by default, requiring explicit user consent
 2. **Channel-Level Control**: Bridge permissions managed per channel, not globally
@@ -844,11 +844,11 @@ Key considerations for maintaining bitchat's privacy model:
 - **Checkpoint Sync**: Periodically sync specific channels when internet is briefly available
 - **Cross-Community Bridges**: Connect related but geographically separated communities
 
-This extension would be implemented as an optional module, ensuring the core bitchat system remains fully functional without any network dependencies. Users in pure offline environments would see no change, while those with selective connectivity could benefit from enhanced reach when desired.
+This extension would be implemented as an optional module, ensuring the core MeshTalk system remains fully functional without any network dependencies. Users in pure offline environments would see no change, while those with selective connectivity could benefit from enhanced reach when desired.
 
 ## Conclusion
 
-bitchat demonstrates that secure, private messaging is possible without centralized infrastructure. By combining Bluetooth mesh networking, end-to-end encryption, and privacy-preserving protocols, bitchat provides resilient communication that works anywhere people gather, regardless of internet availability.
+MeshTalk demonstrates that secure, private messaging is possible without centralized infrastructure. By combining Bluetooth mesh networking, end-to-end encryption, and privacy-preserving protocols, MeshTalk provides resilient communication that works anywhere people gather, regardless of internet availability.
 
 The system's design prioritizes:
 - **User privacy**: No persistent identifiers or metadata collection
@@ -857,7 +857,7 @@ The system's design prioritizes:
 - **Efficiency**: Binary protocols and intelligent caching
 - **Simplicity**: No account creation or complex setup
 
-As a public domain project, bitchat serves as both a practical tool and a reference implementation for decentralized, privacy-preserving communication systems.
+As a public domain project, MeshTalk serves as both a practical tool and a reference implementation for decentralized, privacy-preserving communication systems.
 
 ---
 
